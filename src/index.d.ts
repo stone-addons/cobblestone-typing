@@ -33,7 +33,7 @@ declare class SQLite3 {
   query(
     sql: string,
     params?: SQLite3Param
-  ): Iterable<{ [index: string]: SQLite3Types }>;
+  ): Array<{ [index: string]: SQLite3Types }>;
   /**
    * perform sql update
    * @param sql SQL expression
