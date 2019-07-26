@@ -77,6 +77,7 @@ declare interface CommandOrigin {
 }
 
 declare type CommandResult =
+  | void
   | string
   | ({
       [index: string]: string | number | boolean | VectorXYZ;
