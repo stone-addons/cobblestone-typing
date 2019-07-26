@@ -7,16 +7,39 @@ declare type SQLite3Param = {
 };
 
 declare class SQLite3 {
+  /**
+   * Connect to memory-only database
+   */
+  constructor();
+  /**
+   * Connect to target database (relative to world folder)
+   * @param path Path to database
+   */
   constructor(path: string);
+  /**
+   * perform sql expression
+   * @param sql SQL expression
+   * @param callback value callback
+   */
   exec(
     sql: string,
     callback?: (line: { [index: string]: string }) => void
   ): number;
+  /**
+   * perform sql query
+   * @param sql SQL expression
+   * @param params sql params
+   */
   query(
     sql: string,
-    params: SQLite3Param
+    params?: SQLite3Param
   ): Iterable<{ [index: string]: SQLite3Types }>;
-  update(sql: string, params: SQLite3Param): number;
+  /**
+   * perform sql update
+   * @param sql SQL expression
+   * @param params sql params
+   */
+  update(sql: string, params?: SQLite3Param): number;
 }
 
 declare type CommandTypes = {
