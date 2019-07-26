@@ -124,6 +124,9 @@ declare interface IVanillaServerSystemBase {
     block: IBlock,
     componentName: MinecraftComponent.ExtraData
   ): IComponent<ExtraDataComponent> | null;
+  // * CHAT * //
+  sendText(target: IEntity, content: string): void;
+  broadcastText(content: string): void;
 }
 
 declare const enum MinecraftPolicy {
@@ -132,7 +135,7 @@ declare const enum MinecraftPolicy {
   EntityDropItem = "stone:entity_drop_item",
   PlayerUseItem = "stone:player_use_item",
   PlayerUseItemOn = "stone:player_use_item_on",
-  PlayerDestroyBlock = "stone:player_destroy_block",
+  PlayerDestroyBlock = "stone:player_destroy_block"
 }
 
 declare interface IVanillaServerSystemBase {
@@ -144,7 +147,7 @@ declare interface IVanillaServerSystemBase {
   hasPolicy(name: MinecraftPolicy.PlayerDestroyBlock): true;
 
   handlePolicy(
-    name:MinecraftPolicy.PlayerAttackEntity,
+    name: MinecraftPolicy.PlayerAttackEntity,
     handler: (
       data: {
         player: IEntity;
@@ -154,7 +157,7 @@ declare interface IVanillaServerSystemBase {
     ) => boolean | void
   ): void;
   handlePolicy(
-    name:MinecraftPolicy.EntityPickItemUp,
+    name: MinecraftPolicy.EntityPickItemUp,
     handler: (
       data: {
         entity: IEntity;
