@@ -110,7 +110,7 @@ declare interface ISystemBase {
   applyComponentChanges(entity: IItemStack, component: IComponent<LoreComponent>): true | null;
 
   applyComponentChanges(entity: IEntity | IItemStack | IBlock, component: IComponent<any>): true | null;
-  getComponent<TCompoent>(entity: IEntity | IItemStack | IBlock, componentName: MinecraftComponent | string): IComponent<TCompoent> | null;
+  getComponent<TCompoent = object>(entity: IEntity | IItemStack | IBlock, componentName: MinecraftComponent | string): IComponent<TCompoent> | null;
   hasComponent(entity: IEntity | IItemStack | IBlock, componentName: MinecraftComponent | string): boolean;
 }
 
