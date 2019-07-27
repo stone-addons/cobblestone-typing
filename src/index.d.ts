@@ -85,10 +85,15 @@ declare interface CommandDefinition {
   overloads: Array<CommandOverload>;
 }
 
+declare type DimensionComponent = 0 | 1 | 2;
 declare type ExtraDataComponent = CompoundTag;
 declare type LoreComponent = string[];
 
 declare const enum MinecraftComponent {
+  /**
+   * This component represents dimension of entity
+   */
+  Dimension = "stone:dimension",
   /**
    * This component represents extra data (NBT) of this entity/block
    */
@@ -101,6 +106,9 @@ declare const enum MinecraftComponent {
 
 declare interface ISystemBase {
   // * EXTRA DATA * //
+  getComponent(entity: IEntity, componentName: MinecraftComponent.Dimension): IComponent<DimensionComponent> | null;
+  applyComponentChanges(entity: IEntity, component: IComponent<DimensionComponent>): void;
+
   getComponent(entity: IEntity, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
   getComponent(block: IBlock, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
 
