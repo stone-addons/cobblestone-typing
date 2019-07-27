@@ -47,6 +47,7 @@ declare type CommandTypes = {
   json: object;
   entity: IEntity[];
   player: IEntity[];
+  position: VectorXYZ;
 };
 declare type CommandArgument<K> = K extends keyof CommandTypes
   ? {
