@@ -121,6 +121,13 @@ declare interface IVanillaServerSystemBase {
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
+  // * BLOCK * //
+  setBlock(ticking: ITickingArea, block: string, pos: VectorXYZ): void;
+  setBlock(ticking: ITickingArea, block: string, x: number, y: number, z: number): void;
+  getExtraBlock(ticking: ITickingArea, pos: VectorXYZ): IBlock;
+  getExtraBlock(ticking: ITickingArea, x: number, y: number, z: number): IBlock;
+  setExtraBlock(ticking: ITickingArea, block: string, pos: VectorXYZ): IBlock;
+  setExtraBlock(ticking: ITickingArea, block: string, x: number, y: number, z: number): IBlock;
 }
 
 declare interface IItemStack {
