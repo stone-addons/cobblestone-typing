@@ -198,67 +198,67 @@ declare interface IVanillaServerSystemBase {
   ): void;
 }
 
-declare class BaseTag {
+declare interface BaseTag {
   toString(): string;
 }
 
-declare class ByteTag extends BaseTag {
+declare class ByteTag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class ShortTag extends BaseTag {
+declare class ShortTag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class IntTag extends BaseTag {
+declare class IntTag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class Int64Tag extends BaseTag {
+declare class Int64Tag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class FloatTag extends BaseTag {
+declare class FloatTag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class DoubleTag extends BaseTag {
+declare class DoubleTag implements BaseTag {
   value: number;
   constructor();
   constructor(value: number);
 }
-declare class ByteArrayTag extends BaseTag {
+declare class ByteArrayTag implements BaseTag {
   value: ArrayBuffer;
   constructor();
   constructor(value: ArrayBuffer);
 }
-declare class IntArrayTag extends BaseTag {
+declare class IntArrayTag implements BaseTag {
   value: ArrayBuffer;
   constructor();
   constructor(value: ArrayBuffer);
 }
-declare class StringTag extends BaseTag {
+declare class StringTag implements BaseTag {
   value: string;
   constructor();
   constructor(value: string);
 }
-declare class ListTag extends BaseTag {
+declare class ListTag implements BaseTag {
   value: BaseTag[];
   constructor();
   constructor(value: BaseTag[]);
 }
-declare class CompoundTag extends BaseTag {
+declare class CompoundTag implements BaseTag {
   value: {
     [index: string]: BaseTag;
   };
   constructor();
   constructor(value: { [index: string]: BaseTag });
 }
-declare class EndTag extends BaseTag {
+declare class EndTag implements BaseTag {
   constructor();
 }
