@@ -111,6 +111,7 @@ declare interface IVanillaServerSystemBase {
   getComponent(block: IBlock, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
 
   getComponent(entity: IEntity, componentName: MinecraftComponent.Lore): IComponent<LoreComponent> | null;
+  applyComponentChanges(entity: IEntity, component: IComponent<LoreComponent>): void;
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
