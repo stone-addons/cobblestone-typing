@@ -112,9 +112,39 @@ declare interface IVanillaServerSystemBase {
 
   getComponent(entity: IEntity, componentName: MinecraftComponent.Lore): IComponent<LoreComponent> | null;
   applyComponentChanges(entity: IEntity, component: IComponent<LoreComponent>): void;
+  getComponent(entity: IItemStack, componentName: MinecraftComponent.Lore): IComponent<LoreComponent> | null;
+  applyComponentChanges(entity: IItemStack, component: IComponent<LoreComponent>): true | null;
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
+}
+
+declare interface IItemStack {
+  /**
+   * The type of the object
+   */
+  readonly __type__: "item_stack";
+
+  /**
+   * The identifier of the item stack
+   */
+  readonly __identifier__: string;
+
+  /**
+   * The identifier of the item
+   */
+  readonly item: string;
+
+  /**
+   * The number of items in the stack
+   */
+  readonly count: number;
+
+  readonly __path__: {
+    readonly owner: IEntity;
+    readonly type: "hand" | "hotbar" | "supply" | "container";
+    readonly index: number;
+  };
 }
 
 declare const enum MinecraftPolicy {
@@ -201,19 +231,18 @@ declare interface IVanillaServerSystemBase {
 declare interface BaseTag {
   toString(): string;
 }
-declare type Tag =
-  & ByteTag
-  & ShortTag
-  & IntTag
-  & Int64Tag
-  & FloatTag
-  & DoubleTag
-  & ByteArrayTag
-  & IntArrayTag
-  & StringTag
-  & ListTag
-  & CompoundTag
-  & EndTag;
+declare type Tag = ByteTag &
+  ShortTag &
+  IntTag &
+  Int64Tag &
+  FloatTag &
+  DoubleTag &
+  ByteArrayTag &
+  IntArrayTag &
+  StringTag &
+  ListTag &
+  CompoundTag &
+  EndTag;
 declare class ByteTag implements BaseTag {
   value: number;
   constructor();
