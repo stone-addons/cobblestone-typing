@@ -40,7 +40,7 @@ declare type CommandTypes = {
   message: string;
   string: string;
   int: number;
-  block: object;
+  block: IBlock;
   float: number;
   bool: boolean;
   text: string;
@@ -99,14 +99,7 @@ declare const enum MinecraftComponent {
   Lore = "stone:lore"
 }
 
-declare interface IVanillaServerSystemBase {
-  // * POLICY SYSTEM * //
-  hasPolicy(name: string): boolean;
-  registerPolicy(name: string): void;
-  checkPolicy(name: string, data: any, def: boolean): boolean;
-  handlePolicy(name: string, handler: (data: any, last: boolean) => boolean | void): void;
-  // * COMMAND SYSTEM * //
-  registerCommand(name: string, def: CommandDefinition): void;
+declare interface ISystemBase {
   // * EXTRA DATA * //
   getComponent(entity: IEntity, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
   getComponent(block: IBlock, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
@@ -117,8 +110,18 @@ declare interface IVanillaServerSystemBase {
   applyComponentChanges(entity: IItemStack, component: IComponent<LoreComponent>): true | null;
 
   applyComponentChanges(entity: IEntity | IItemStack | IBlock, component: IComponent<any>): true | null;
-  getComponent(entity: IEntity | IItemStack | IBlock, componentName: string): IComponent<any> | null;
-  hasComponent(entity: IEntity | IItemStack | IBlock, componentName: string): boolean;
+  getComponent<TCompoent>(entity: IEntity | IItemStack | IBlock, componentName: MinecraftComponent | string): IComponent<TCompoent> | null;
+  hasComponent(entity: IEntity | IItemStack | IBlock, componentName: MinecraftComponent | string): boolean;
+}
+
+declare interface IVanillaServerSystemBase {
+  // * POLICY SYSTEM * //
+  hasPolicy(name: string): boolean;
+  registerPolicy(name: string): void;
+  checkPolicy(name: string, data: any, def: boolean): boolean;
+  handlePolicy(name: string, handler: (data: any, last: boolean) => boolean | void): void;
+  // * COMMAND SYSTEM * //
+  registerCommand(name: string, def: CommandDefinition): void;
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
