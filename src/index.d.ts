@@ -21,19 +21,13 @@ declare class SQLite3 {
    * @param sql SQL expression
    * @param callback value callback
    */
-  exec(
-    sql: string,
-    callback?: (line: { [index: string]: string }) => void
-  ): number;
+  exec(sql: string, callback?: (line: { [index: string]: string }) => void): number;
   /**
    * perform sql query
    * @param sql SQL expression
    * @param params sql params
    */
-  query(
-    sql: string,
-    params?: SQLite3Param
-  ): Array<{ [index: string]: SQLite3Types }>;
+  query(sql: string, params?: SQLite3Param): Array<{ [index: string]: SQLite3Types }>;
   /**
    * perform sql update
    * @param sql SQL expression
@@ -61,13 +55,9 @@ declare type CommandArgument<K> = K extends keyof CommandTypes
       optional?: true;
     }
   : never;
-declare type MappedArgsDefs<T extends Array<keyof CommandTypes>> = {
-  readonly [K in keyof T]: CommandArgument<T[K]>
-};
+declare type MappedArgsDefs<T extends Array<keyof CommandTypes>> = { readonly [K in keyof T]: CommandArgument<T[K]> };
 declare type MappedArgs<T extends Array<keyof CommandTypes>> = {
-  readonly [K in keyof T]: T[K] extends keyof CommandTypes
-    ? CommandTypes[T[K]]
-    : never
+  readonly [K in keyof T]: T[K] extends keyof CommandTypes ? CommandTypes[T[K]] : never
 };
 
 declare interface CommandOrigin {
@@ -83,9 +73,7 @@ declare type CommandResult =
       [index: string]: string | number | boolean | VectorXYZ;
     } & { toString(): string });
 
-declare interface CommandOverload<
-  TArgs extends Array<keyof CommandTypes> = Array<keyof CommandTypes>
-> {
+declare interface CommandOverload<TArgs extends Array<keyof CommandTypes> = Array<keyof CommandTypes>> {
   parameters: MappedArgsDefs<TArgs>;
   handler: (this: CommandOrigin, args: MappedArgs<TArgs>) => CommandResult;
 }
@@ -97,12 +85,17 @@ declare interface CommandDefinition {
 }
 
 declare type ExtraDataComponent = CompoundTag;
+declare type LoreComponent = string[];
 
 declare const enum MinecraftComponent {
   /**
    * This component represents extra data (NBT) of this entity/block
    */
-  ExtraData = "stone:extra_data"
+  ExtraData = "stone:extra_data",
+  /**
+   * This component represents lore of item
+   */
+  Lore = "stone:lore"
 }
 
 declare interface IVanillaServerSystemBase {
@@ -110,21 +103,14 @@ declare interface IVanillaServerSystemBase {
   hasPolicy(name: string): boolean;
   registerPolicy(name: string): void;
   checkPolicy(name: string, data: any, def: boolean): boolean;
-  handlePolicy(
-    name: string,
-    handler: (data: any, last: boolean) => boolean | void
-  ): void;
+  handlePolicy(name: string, handler: (data: any, last: boolean) => boolean | void): void;
   // * COMMAND SYSTEM * //
   registerCommand(name: string, def: CommandDefinition): void;
   // * EXTRA DATA * //
-  getComponent(
-    entity: IEntity,
-    componentName: MinecraftComponent.ExtraData
-  ): IComponent<ExtraDataComponent> | null;
-  getComponent(
-    block: IBlock,
-    componentName: MinecraftComponent.ExtraData
-  ): IComponent<ExtraDataComponent> | null;
+  getComponent(entity: IEntity, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
+  getComponent(block: IBlock, componentName: MinecraftComponent.ExtraData): IComponent<ExtraDataComponent> | null;
+
+  getComponent(entity: IEntity, componentName: MinecraftComponent.Lore): IComponent<LoreComponent> | null;
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
