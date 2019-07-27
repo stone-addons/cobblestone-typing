@@ -201,7 +201,19 @@ declare interface IVanillaServerSystemBase {
 declare interface BaseTag {
   toString(): string;
 }
-
+declare type Tag =
+  & ByteTag
+  & ShortTag
+  & IntTag
+  & Int64Tag
+  & FloatTag
+  & DoubleTag
+  & ByteArrayTag
+  & IntArrayTag
+  & StringTag
+  & ListTag
+  & CompoundTag
+  & EndTag;
 declare class ByteTag implements BaseTag {
   value: number;
   constructor();
@@ -248,16 +260,16 @@ declare class StringTag implements BaseTag {
   constructor(value: string);
 }
 declare class ListTag implements BaseTag {
-  value: BaseTag[];
+  value: Tag[];
   constructor();
-  constructor(value: BaseTag[]);
+  constructor(value: Tag[]);
 }
 declare class CompoundTag implements BaseTag {
   value: {
-    [index: string]: BaseTag;
+    [index: string]: Tag;
   };
   constructor();
-  constructor(value: { [index: string]: BaseTag });
+  constructor(value: { [index: string]: Tag });
 }
 declare class EndTag implements BaseTag {
   constructor();
