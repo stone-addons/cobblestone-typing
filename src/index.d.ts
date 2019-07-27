@@ -114,6 +114,10 @@ declare interface IVanillaServerSystemBase {
   applyComponentChanges(entity: IEntity, component: IComponent<LoreComponent>): void;
   getComponent(entity: IItemStack, componentName: MinecraftComponent.Lore): IComponent<LoreComponent> | null;
   applyComponentChanges(entity: IItemStack, component: IComponent<LoreComponent>): true | null;
+
+  applyComponentChanges(entity: IEntity | IItemStack | IBlock, component: IComponent<any>): true | null;
+  getComponent(entity: IEntity | IItemStack | IBlock, componentName: string): IComponent<any> | null;
+  hasComponent(entity: IEntity | IItemStack | IBlock, componentName: string): boolean;
   // * CHAT * //
   sendText(target: IEntity, content: string): void;
   broadcastText(content: string): void;
