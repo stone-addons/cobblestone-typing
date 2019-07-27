@@ -40,7 +40,7 @@ declare type CommandTypes = {
   message: string;
   string: string;
   int: number;
-  block: IBlock;
+  block: string;
   float: number;
   bool: boolean;
   text: string;
