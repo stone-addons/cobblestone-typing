@@ -140,6 +140,9 @@ declare interface IVanillaServerSystemBase {
   getExtraBlock(ticking: ITickingArea, x: number, y: number, z: number): IBlock;
   setExtraBlock(ticking: ITickingArea, block: string, pos: VectorXYZ): IBlock;
   setExtraBlock(ticking: ITickingArea, block: string, x: number, y: number, z: number): IBlock;
+  // * STRUCTURE * //
+  getStructure(ticking: ITickingArea, pos: VectorXYZ, size: VectorXYZ): CompoundTag;
+  setStructure(ticking: ITickingArea, pos: VectorXYZ, data: CompoundTag): void;
 }
 
 declare interface IItemStack {
