@@ -131,7 +131,7 @@ declare interface IVanillaServerSystemBase {
   // * COMMAND SYSTEM * //
   registerCommand(name: string, def: CommandDefinition): void;
   // * CHAT * //
-  sendText(target: IEntity, content: string): void;
+  sendText(target: IEntity, content: string, type?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9, sender?: string): void;
   broadcastText(content: string): void;
   // * BLOCK * //
   setBlock(ticking: ITickingArea, block: string, pos: VectorXYZ): void;
