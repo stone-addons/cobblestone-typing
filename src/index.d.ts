@@ -224,7 +224,7 @@ declare interface IVanillaServerSystemBase {
     name: MinecraftPolicy.PlayerUseItem,
     handler: (
       data: {
-        entity: IEntity;
+        player: IEntity;
         item: IItemStack;
       },
       last: boolean
@@ -234,7 +234,7 @@ declare interface IVanillaServerSystemBase {
     name: MinecraftPolicy.PlayerUseItemOn,
     handler: (
       data: {
-        entity: IEntity;
+        player: IEntity;
         item: IItemStack;
         pos: VectorXYZ;
         block: IBlock;
